@@ -28,4 +28,7 @@ def get_todos():
 
     
 def save_todos(todos):
-    pd.DataFrame(todos).to_csv(todo_csv_path, index=False)
+    if len(todos) == 0:
+        os.remove(todo_csv_path)
+    else:
+        pd.DataFrame(todos).to_csv(todo_csv_path, index=False)

@@ -1,42 +1,10 @@
 from pydantic import BaseModel
 import time
+
 from cat.mad_hatter.decorators import tool, hook
 from cat.log import log
 
-
-
-#from .todo_save_load import get_todos, save_todos
-
-import os
-import pandas as pd
-
-
-todo_csv_path = os.path.join(
-    os.path.dirname(__file__), "todo.csv"
-)
-
-
-def get_todos():
-    if not os.path.exists(todo_csv_path):
-        return []
-    else:
-        df = pd.read_csv(todo_csv_path)
-        return df.to_dict(orient="records")
-
-    
-def save_todos(todos):
-    pd.DataFrame(todos).to_csv(todo_csv_path, index=False)
-
-
-def stringify_todos(todos):
-    if len(todos) == 0:
-        return "Your todo is empty."
-    
-    out = "### Todo list:"
-    for t in todos:
-        out += "\n - " + t["description"]
-
-    return out
+from .todo import get_todos, save_todos, stringify_todos
 
 
 @tool(return_direct=True)

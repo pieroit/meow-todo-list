@@ -22,7 +22,7 @@ def add_todo(todo, cat):
 
     save_todos(todos)
 
-    return f"Todo list updated with: *{todo}*"
+    return f"Todo list updated with: *{', '.join(todo)}*"
 
 
 @tool(return_direct=True)

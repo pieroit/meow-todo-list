@@ -10,9 +10,13 @@ from .todo import get_todos, save_todos, stringify_todos
 
 @tool(return_direct=True)
 def add_todo(todo, cat):
-    """Add item or multiple items to the todo list. User may say "Remeber to..." or similar. Argument "todo" is an array of items."""
+    """Add item or multiple items to the todo list. User may say "Remeber to..." or similar. Input is an array of items."""
 
-    todo = literal_eval(todo)
+    try:
+        todo = literal_eval(todo)
+    except Exception as e:
+        log(e, "ERROR")
+        return f"Sorry there was an error: {e}. Can you ask in a different way?"
     todos = get_todos()
     for elem in todo:
         todos.append({
@@ -27,7 +31,7 @@ def add_todo(todo, cat):
 
 @tool(return_direct=True)
 def remove_todo(todo, cat):
-    """Remove / delete item or multiple items from the todo list. "todo" is the array of items to remove."""
+    """Remove / delete item or multiple items from the todo list. Input is the array of items to remove."""
     todos = get_todos()
 
     # TODO: should we use embeddings?
@@ -48,8 +52,8 @@ def remove_todo(todo, cat):
 
 
 @tool(return_direct=True)
-def search_todo(query, cat):
-    """Get things in the todo list. "query" is a string used to filter the list."""
+def list_todo(query, cat):
+    """List what is in the todo list. Input is a string used to filter the list."""
     
     todos = get_todos()
     return stringify_todos(todos)

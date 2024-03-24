@@ -3,8 +3,8 @@
 ## What you can do:
 
  - List all todo items
- - Add todo item
- - remove todo item
+ - Add one or multiple todo items
+ - remove one or multiple todo items
 
 Todo list will be saved in the plugin folder, in a file named `todo.csv`.
 
